@@ -1,0 +1,19 @@
+POST http://localhost:3000/posts
+Content-Type:application/json
+
+{
+   "title":"What's new in Nst JS?",
+   "postType":"post",
+   "slug":"new-slug-data",
+   "status:"draft",
+   "content":"New Content",
+   "schema":{name:"Priyansh"},
+   "featureImageUrl":"http://localhost.com/images/image1.jpg",
+   "publishOn":"August 16, 2025",
+   "tags":["nestjs","typescript"],
+   "metaOptions":[{
+    "key":"tes1",
+    "value":true
+   }]
+
+}
