@@ -6,6 +6,7 @@ import { UserModule } from './users/users.module';
 import { PostModule } from './posts/posts.module';
 import { TypeOrmModule } from '@nestjs/typeorm';
 import { User } from './users/user.entity';
+import { Post } from './posts/post.entity';
 
 @Module({
   imports: [UserModule,PostModule,TypeOrmModule.forRootAsync({
@@ -13,7 +14,7 @@ import { User } from './users/user.entity';
     inject:[],
     useFactory:()=>({
       type:'postgres',
-      entities:[User],
+      entities:[User,Post],
       synchronize:true,
       port:5432,
       username:'postgres',
