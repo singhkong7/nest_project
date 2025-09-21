@@ -1,26 +1,32 @@
 /* eslint-disable prettier/prettier */
 /* eslint-disable @typescript-eslint/no-unsafe-assignment */
 /* eslint-disable prettier/prettier */
-import { Body, Controller, Get,Param, ParseIntPipe, Patch, Post, Query, ValidationPipe } from '@nestjs/common';
+import { Body, Controller, DefaultValuePipe, Get, Param, ParseIntPipe, Patch, Post, Query, ValidationPipe } from '@nestjs/common';
 import { CreateUserDto } from './dtos/create-user.dto';
 import { PatchUserDto } from './dtos/patch-user.dto';
+import { UsersService } from './providers/users.service';
+import { GetUsersParamDto } from './dtos/get-user-params-dto';
 
 @Controller('users')
 export class UserController {
-  @Get('/:id')
-  public getUsers(
-    @Param('id',ParseIntPipe) id:number|undefined,
-  @Query() query:any
-) {
-    console.log("params",query)
-    return 'Here is the list of users.';
+
+   constructor(
+    // Injecting Users Service
+    private readonly usersService: UsersService,
+  ) {}
+
+  @Get()
+    public getUsers() {
+    return this.usersService.findAll();
   }
+
+
+
   @Post()
   public createUser(
    @Body(new ValidationPipe()) createUserDto: CreateUserDto,
 ){
-    console.log('body',createUserDto)
-    return 'You sent a post request for users'
+    return this.usersService.createUser(createUserDto)
   }
   @Patch()
   public patchUser(

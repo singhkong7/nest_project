@@ -1,5 +1,5 @@
 /* eslint-disable prettier/prettier */
-import { IsArray, IsEnum, IsISO8601, IsJSON, IsNotEmpty, IsOptional, IsString, IsUrl, MinLength } from "class-validator";
+import { IsArray, IsEnum, IsISO8601, IsJSON, IsNotEmpty, IsOptional, IsString, IsUrl, MaxLength, MinLength } from "class-validator";
 import { postStatus } from "../enums/postStatus.enum";
 import { postType } from "../enums/postType.enum";
 import { CreatePostMetaOptionsDto } from "./create-posts-metaoptions.dto";
@@ -8,6 +8,7 @@ import { CreatePostMetaOptionsDto } from "./create-posts-metaoptions.dto";
 export class CreatePostDto{
     @IsString()
     @MinLength(4)
+    @MaxLength(512)
     @IsNotEmpty()
     title:string;
 
@@ -17,6 +18,7 @@ export class CreatePostDto{
 
      @IsString()
     @IsNotEmpty()
+    @MaxLength(256)
     slug:string;
 
     @IsEnum(postStatus)
@@ -34,6 +36,7 @@ export class CreatePostDto{
 
     @IsString()
     @IsUrl()
+    @MaxLength(1024)
     featureImageUrl?:string;
 
     @IsISO8601()
