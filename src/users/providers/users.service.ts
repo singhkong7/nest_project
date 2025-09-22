@@ -4,7 +4,6 @@ import { InjectRepository } from "@nestjs/typeorm";
 import { User } from "../user.entity";
 import { Repository } from "typeorm";
 import { CreateUserDto } from "../dtos/create-user.dto";
-import { GetUsersParamDto } from "../dtos/get-user-params-dto";
 
 @Injectable()
 export class UsersService {
@@ -21,10 +20,14 @@ export class UsersService {
         where:{email:createUserDto.email}
     });
 
-    let newUser=this.usersRepository.create(createUserDto);
+    if(!existingUser)
+    {
+        let newUser=this.usersRepository.create(createUserDto);
     newUser=await this.usersRepository.save(newUser);
 
     return newUser;
+    }
+    return 'User Already exist!!!'
 
   }
 

@@ -7,9 +7,11 @@ import { PostModule } from './posts/posts.module';
 import { TypeOrmModule } from '@nestjs/typeorm';
 import { User } from './users/user.entity';
 import { Post } from './posts/post.entity';
+import { TagsModule } from './tags/tags.module';
+import { MetaOptionsModule } from './meta-options/meta-options.module';
 
 @Module({
-  imports: [UserModule,PostModule,TypeOrmModule.forRootAsync({
+  imports: [UserModule,PostModule,TagsModule,TypeOrmModule.forRootAsync({
     imports:[],
     inject:[],
     useFactory:()=>({
@@ -22,7 +24,7 @@ import { Post } from './posts/post.entity';
       host:'localhost',
       database:'nestjs-blog'
     })
-  })],
+  }), TagsModule, MetaOptionsModule],
   controllers: [AppController],
   providers: [AppService],
 })

@@ -2,7 +2,7 @@
 import { IsArray, IsEnum, IsISO8601, IsJSON, IsNotEmpty, IsOptional, IsString, IsUrl, MaxLength, MinLength } from "class-validator";
 import { postStatus } from "../enums/postStatus.enum";
 import { postType } from "../enums/postType.enum";
-import { CreatePostMetaOptionsDto } from "./create-posts-metaoptions.dto";
+import { CreatePostMetaOptionsDto } from "../../meta-options/dtos/create-posts-metaoptions.dto";
 
 
 export class CreatePostDto{
